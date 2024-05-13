@@ -17,6 +17,12 @@ public:
 
 private:
     Ui::LoginDialog *ui;
+
+
+
+
+signals:
+    void switchRegister();//切换注册界面的信号
 };
 
 #endif // LOGINDIALOG_H
