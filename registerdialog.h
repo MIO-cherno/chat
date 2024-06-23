@@ -20,11 +20,12 @@ private:
 
 private:
     void showTip(QString str,bool state);
+    void initHttpHandlers();
 
 private slots:
     void get_code_clicked();
-    void solt_reg_mod_finshed(ReqId id, QString res, ErrorCodes err);
-    void initHttpHandlers();
+    void slot_reg_mod_finsh(ReqId id, QString res, ErrorCodes err);
+
 
 
 

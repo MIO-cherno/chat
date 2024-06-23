@@ -6,7 +6,6 @@
 #include "global.h"
 
 template <typename T>
-
 class Singleton
 {
 protected:
@@ -14,7 +13,7 @@ protected:
     Singleton() = default;
     Singleton(const Singleton<T>&) = delete;
     Singleton& operator=(const Singleton& st) = delete;
-    static std::shared_ptr<T> instance;//如果是模板类要在.h内，类外初始化；否则放在.cpp中初始化
+    static std::shared_ptr<T> _instance;//如果是模板类要在.h内，类外初始化；否则放在.cpp中初始化
 
 public:
 

@@ -1,6 +1,15 @@
 #ifndef GLOBAL_H
 #define GLOBAL_H
-
+/******************************************************************************
+ *
+ * @file       global.h
+ * @brief      为了控制界面的刷新，接下来项目中添加global.h和global.cpp文件，
+ *             global.h声明repolish函数，global.cpp用来定义这个函数。
+ *
+ * @author     MIO-Cherno
+ * @date       2024/05/15
+ * @history
+ *****************************************************************************/
 #include <QWidget>
 #include <functional>
 #include <QStyle>
@@ -24,10 +33,10 @@ enum ReqId{
     ID_GET_VARIFY_CODE = 1001,  //获取验证码
     ID_REG_USER = 1002,     //注册用户
 };
-enmu Modules{
+enum Modules{
     REGISTERMOD = 0,
 };
-enmu ErrorCodes{
+enum ErrorCodes{
     SUCCESS = 0,
     ERR_JSON = 1, //Json解析失败
     ERR_NETWORK = 2,//网络失败

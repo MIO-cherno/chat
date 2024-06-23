@@ -20,6 +20,9 @@ RegisterDialog::RegisterDialog(QWidget *parent)
 
     connect(ui->getCodeBtn,&QPushButton::clicked,this,&RegisterDialog::get_code_clicked);
 
+    //? why is "HttpMgr::GetInstance().get()"
+    //HttpMgr::GetInstance()是HttpMgr的智能指针，get是获取智能指针的裸指针
+    //裸指针是指智能指针类内部持有的、用于管理对象的实际指针
     connect(HttpMgr::GetInstance().get(), &HttpMgr::sig_reg_mod_finish,
             this, &RegisterDialog::slot_reg_mod_finish);
 
@@ -53,7 +56,7 @@ void RegisterDialog::showTip(QString str,bool state)
     repolish(ui->errorTip);
 }
 
-void RegisterDialog::solt_reg_mod_finshed(ReqId id, QString res, ErrorCodes err)
+void RegisterDialog::slot_reg_mod_finsh(ReqId id, QString res, ErrorCodes err)
 {
     //error
     if(err != ErrorCodes::SUCCESS){
@@ -85,8 +88,11 @@ void RegisterDialog::solt_reg_mod_finshed(ReqId id, QString res, ErrorCodes err)
 
 void RegisterDialog::initHttpHandlers()
 {
+    //function:先把注册及其对注册所做出的反应插入_handlers,以便之后根据id调用
     //注册获取验证码回包逻辑
-    _handlers.insert(ReqId::ID_GET_VARIFY_CODE, [this](QJsonObject jsonObj){
+    //map的insert参数要为键值对
+    _handlers.insert(ReqId::ID_GET_VARIFY_CODE, [this](QJsonObject& jsonObj){
+        //可以捕获this ，因为qt会自动维护生命周期，保证RegisterDialog在其生命周期内不被销毁
         int error = jsonObj["error"].toInt();
         if(error != ErrorCodes::SUCCESS){
             showTip(tr("参数错误"),false);
